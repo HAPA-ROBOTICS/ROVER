@@ -1,56 +1,53 @@
-
 #include "globalVar.h"
 
-
-//select kit version
+// select kit version
 #define KIT_VERSION HAPA_RK0
 
-
-void SysTick_Handler(void)
+void SysTick_Handler(void) //init clock
 {
     HAL_IncTick();
 }
 
+int _write(int file, char *ptr, int len) //init uart call
+{
+    HAL_UART_Transmit(&huart1, (uint8_t *)ptr, len, HAL_MAX_DELAY);
+    return len;
+}
+
 int main(void)
 {
-
     hapa_init_system();
 
-    while (1)
-    {
-                // Forward
-        HAL_GPIO_WritePin(MOTOR_PORT, ENA, GPIO_PIN_SET);
-        HAL_GPIO_WritePin(MOTOR_PORT, IN1, GPIO_PIN_SET);
-        HAL_GPIO_WritePin(MOTOR_PORT, IN2, GPIO_PIN_RESET);
+    printf("\n");
+    printf("=====================================\n");
+    printf(" HAPA Robotics - RK0\n");
+    printf(" Rover Kit 0 Booting...\n");
+    printf("=====================================\n");
 
-        HAL_GPIO_WritePin(MOTOR_PORT, ENB, GPIO_PIN_SET);
-        HAL_GPIO_WritePin(MOTOR_PORT, IN3, GPIO_PIN_SET);
-        HAL_GPIO_WritePin(MOTOR_PORT, IN4, GPIO_PIN_RESET);
-
+    while (1){
+        hapa_move(HAPA_FORWARD, HAPA_FORWARD);
         HAL_Delay(5000);
-
-        // Stop
-        HAL_GPIO_WritePin(MOTOR_PORT, ENA, GPIO_PIN_RESET);
-        HAL_GPIO_WritePin(MOTOR_PORT, ENB, GPIO_PIN_RESET);
-
+        hapa_move(HAPA_STOP, HAPA_STOP);
         HAL_Delay(2000);
-
-        // Reverse
-        HAL_GPIO_WritePin(MOTOR_PORT, IN1, GPIO_PIN_RESET);
-        HAL_GPIO_WritePin(MOTOR_PORT, IN2, GPIO_PIN_SET);
-
-        HAL_GPIO_WritePin(MOTOR_PORT, IN3, GPIO_PIN_RESET);
-        HAL_GPIO_WritePin(MOTOR_PORT, IN4, GPIO_PIN_SET);
-
-        HAL_GPIO_WritePin(MOTOR_PORT, ENA, GPIO_PIN_SET);
-        HAL_GPIO_WritePin(MOTOR_PORT, ENB, GPIO_PIN_SET);
-
+        hapa_move(HAPA_FORWARD, HAPA_STOP);
         HAL_Delay(5000);
-
-        // Stop
-        HAL_GPIO_WritePin(MOTOR_PORT, ENA, GPIO_PIN_RESET);
-        HAL_GPIO_WritePin(MOTOR_PORT, ENB, GPIO_PIN_RESET);
-
+        hapa_move(HAPA_STOP, HAPA_STOP);
+        HAL_Delay(2000);
+        hapa_move(HAPA_STOP, HAPA_FORWARD);
+        HAL_Delay(5000);
+        hapa_move(HAPA_STOP, HAPA_STOP);
+        HAL_Delay(2000);
+        hapa_move(HAPA_REVERSE, HAPA_REVERSE);
+        HAL_Delay(5000);
+        hapa_move(HAPA_STOP, HAPA_STOP);
+        HAL_Delay(2000);
+        hapa_move(HAPA_STOP, HAPA_REVERSE);
+        HAL_Delay(5000);
+        hapa_move(HAPA_STOP, HAPA_STOP);
+        HAL_Delay(2000);
+        hapa_move(HAPA_REVERSE, HAPA_STOP);
+        HAL_Delay(5000);
+        hapa_move(HAPA_STOP, HAPA_STOP);
         HAL_Delay(2000);
     }
 }
