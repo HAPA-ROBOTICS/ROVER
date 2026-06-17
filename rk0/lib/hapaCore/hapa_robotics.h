@@ -39,6 +39,14 @@ void hapa_motion_light_toggle(hapa_motion_light_t light);
     //IR REMOTE
     #define IR_PORT GPIOB
     #define IR_PIN  GPIO_PIN_0
+    typedef enum{
+        HAPA_IR_FD = 0,
+        HAPA_IR_RV  = 1, 
+        HAPA_IR_N = 2
+        
+    } hapa_ir_pos_ctrl_t;
+    extern uint32_t hapa_ir_ctrl[3];
+    uint8_t hapa_ir_read_nec(uint32_t *code);
 
 #endif
 

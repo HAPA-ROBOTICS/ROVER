@@ -23,6 +23,8 @@ void hapa_motor_init(void)
 
 #if KIT_VERSION == HAPA_RK0
 
+    uint8_t is_in_motion = 0;
+
     void hapa_move(hapa_motor_state_t left, hapa_motor_state_t right)
     {
         if (left == HAPA_STOP && right == HAPA_STOP)
