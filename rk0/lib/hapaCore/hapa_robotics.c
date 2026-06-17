@@ -14,6 +14,24 @@ static void hapa_ir_init(void){
     HAL_GPIO_Init(IR_PORT, &ir_gpio);
 }
 
+static void hapa_motion_light_ind_init(void){
+    
+    
+    GPIO_InitTypeDef led_ind = {
+        .Pin = RED_LED_IND | GREEN_LED_IND | BLUE_LED_IND,
+        .Mode = GPIO_MODE_OUTPUT_PP,
+        .Speed = GPIO_SPEED_FREQ_LOW,
+        .Pull = GPIO_NOPULL
+    };
+
+    HAL_GPIO_Init(LED_IND_GPIO_PORT, &led_ind);
+
+    HAL_GPIO_WritePin(LED_IND_GPIO_PORT, RED_LED_IND, GPIO_PIN_SET);
+    HAL_GPIO_WritePin(LED_IND_GPIO_PORT, BLUE_LED_IND, GPIO_PIN_SET);
+    HAL_GPIO_WritePin(LED_IND_GPIO_PORT, GREEN_LED_IND, GPIO_PIN_RESET); //indcate we are ready
+
+}
+
 
 void hapa_init_system(void)
 {
@@ -24,6 +42,7 @@ void hapa_init_system(void)
 
     hapa_motor_init();
     hapa_uart_init();
+    hapa_motion_light_ind_init();
 
 
     #if KIT_VERSION == HAPA_RK0
@@ -31,4 +50,28 @@ void hapa_init_system(void)
     #endif
 }
 
+void hapa_motion_light_toggle(hapa_motion_light_t light){
 
+    switch (light)
+    {
+    case HAPA_MOTION_LIGHT_OFF: // indicate rover in neutral 
+    
+        HAL_GPIO_WritePin(LED_IND_GPIO_PORT, BLUE_LED_IND | RED_LED_IND, GPIO_PIN_SET);
+        HAL_GPIO_WritePin(LED_IND_GPIO_PORT, GREEN_LED_IND, GPIO_PIN_RESET); 
+        break;
+
+    case HAPA_MOTION_LIGHT_FD: // indicate rover is in drive
+        HAL_GPIO_WritePin(LED_IND_GPIO_PORT, GREEN_LED_IND | RED_LED_IND, GPIO_PIN_SET);
+        HAL_GPIO_WritePin(LED_IND_GPIO_PORT, BLUE_LED_IND, GPIO_PIN_RESET); 
+        break;
+
+    case HAPA_MOTION_LIGHT_RV: // indicate rover is in reverse
+        HAL_GPIO_WritePin(LED_IND_GPIO_PORT, GREEN_LED_IND | BLUE_LED_IND, GPIO_PIN_SET);
+        HAL_GPIO_WritePin(LED_IND_GPIO_PORT, RED_LED_IND, GPIO_PIN_RESET); 
+        break;
+    
+    default:
+        break;
+    }
+
+}

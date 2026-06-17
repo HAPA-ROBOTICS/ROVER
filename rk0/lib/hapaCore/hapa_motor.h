@@ -6,8 +6,7 @@
 /**
  * @brief Motor direction
  */
-typedef enum
-{
+typedef enum{
     HAPA_REVERSE = -1,
     HAPA_STOP    = 0,
     HAPA_FORWARD = 1
@@ -71,8 +70,8 @@ typedef enum
     *           1 = Forward
     */
     void hapa_move(
-        hapa_motor_state_t right,
-        hapa_motor_state_t left
+        hapa_motor_state_t left,
+        hapa_motor_state_t right
     );
 
 #elif KIT_VERSION == HAPA_RK1

@@ -30,6 +30,7 @@ void hapa_motor_init(void)
             HAL_GPIO_WritePin(MOTOR_PORT,
                             MOTOR_ENABLE | LEFT_IN1 | LEFT_IN2 | RIGHT_IN1 | RIGHT_IN2,
                             GPIO_PIN_RESET);
+            hapa_motion_light_toggle(HAPA_MOTION_LIGHT_OFF);
             return;
         }
 
@@ -37,14 +38,17 @@ void hapa_motor_init(void)
 
         switch (left)
         {
-            case HAPA_FORWARD:
+            case HAPA_REVERSE:
                 HAL_GPIO_WritePin(MOTOR_PORT, LEFT_IN1, GPIO_PIN_SET);
                 HAL_GPIO_WritePin(MOTOR_PORT, LEFT_IN2, GPIO_PIN_RESET);
+                hapa_motion_light_toggle(HAPA_MOTION_LIGHT_RV);
                 break;
 
-            case HAPA_REVERSE:
+            case HAPA_FORWARD:
                 HAL_GPIO_WritePin(MOTOR_PORT, LEFT_IN1, GPIO_PIN_RESET);
                 HAL_GPIO_WritePin(MOTOR_PORT, LEFT_IN2, GPIO_PIN_SET);
+                hapa_motion_light_toggle(HAPA_MOTION_LIGHT_FD);
+
                 break;
 
             case HAPA_STOP:
@@ -55,14 +59,16 @@ void hapa_motor_init(void)
 
         switch (right)
         {
-            case HAPA_FORWARD:
+            case HAPA_REVERSE:
                 HAL_GPIO_WritePin(MOTOR_PORT, RIGHT_IN1, GPIO_PIN_SET);
                 HAL_GPIO_WritePin(MOTOR_PORT, RIGHT_IN2, GPIO_PIN_RESET);
+                hapa_motion_light_toggle(HAPA_MOTION_LIGHT_RV);
                 break;
 
-            case HAPA_REVERSE:
+            case HAPA_FORWARD:
                 HAL_GPIO_WritePin(MOTOR_PORT, RIGHT_IN1, GPIO_PIN_RESET);
                 HAL_GPIO_WritePin(MOTOR_PORT, RIGHT_IN2, GPIO_PIN_SET);
+                hapa_motion_light_toggle(HAPA_MOTION_LIGHT_FD);
                 break;
 
             case HAPA_STOP:

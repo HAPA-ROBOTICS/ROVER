@@ -25,29 +25,24 @@ int main(void)
     printf("=====================================\n");
 
     while (1){
-        hapa_move(HAPA_FORWARD, HAPA_FORWARD);
-        HAL_Delay(5000);
-        hapa_move(HAPA_STOP, HAPA_STOP);
-        HAL_Delay(2000);
-        hapa_move(HAPA_FORWARD, HAPA_STOP);
-        HAL_Delay(5000);
-        hapa_move(HAPA_STOP, HAPA_STOP);
-        HAL_Delay(2000);
-        hapa_move(HAPA_STOP, HAPA_FORWARD);
-        HAL_Delay(5000);
-        hapa_move(HAPA_STOP, HAPA_STOP);
-        HAL_Delay(2000);
-        hapa_move(HAPA_REVERSE, HAPA_REVERSE);
-        HAL_Delay(5000);
-        hapa_move(HAPA_STOP, HAPA_STOP);
-        HAL_Delay(2000);
-        hapa_move(HAPA_STOP, HAPA_REVERSE);
-        HAL_Delay(5000);
-        hapa_move(HAPA_STOP, HAPA_STOP);
-        HAL_Delay(2000);
-        hapa_move(HAPA_REVERSE, HAPA_STOP);
-        HAL_Delay(5000);
-        hapa_move(HAPA_STOP, HAPA_STOP);
-        HAL_Delay(2000);
+        // hapa_move(HAPA_FORWARD, HAPA_FORWARD);
+        // HAL_Delay(2000);
+        // hapa_move(HAPA_STOP, HAPA_STOP);
+        // HAL_Delay(500);
+        // hapa_move(HAPA_FORWARD, HAPA_STOP);
+        // HAL_Delay(2000);
+        // hapa_move(HAPA_STOP, HAPA_STOP);
+        // HAL_Delay(500);
+        // hapa_move(HAPA_STOP, HAPA_FORWARD);
+        // HAL_Delay(2000);
+        // hapa_move(HAPA_STOP, HAPA_STOP);
+        // HAL_Delay(500);
+        // hapa_move(HAPA_STOP, HAPA_FORWARD);
+        // hapa_move(HAPA_STOP, HAPA_STOP);
+        // HAL_Delay(500);
+        // hapa_move(HAPA_REVERSE, HAPA_REVERSE);
+        // HAL_Delay(5000);
+        // hapa_move(HAPA_STOP, HAPA_STOP);
+        // HAL_Delay(500);
     }
 }
