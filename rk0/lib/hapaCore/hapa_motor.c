@@ -25,7 +25,7 @@ void hapa_motor_init(void)
 
     uint8_t is_in_motion = 0;
 
-    void hapa_move(hapa_motor_state_t left, hapa_motor_state_t right)
+    void hapa_move(hapa_motor_state_t right, hapa_motor_state_t left)
     {
         if (left == HAPA_STOP && right == HAPA_STOP)
         {
@@ -41,14 +41,14 @@ void hapa_motor_init(void)
         switch (left)
         {
             case HAPA_REVERSE:
-                HAL_GPIO_WritePin(MOTOR_PORT, LEFT_IN1, GPIO_PIN_SET);
-                HAL_GPIO_WritePin(MOTOR_PORT, LEFT_IN2, GPIO_PIN_RESET);
+                HAL_GPIO_WritePin(MOTOR_PORT, LEFT_IN1, GPIO_PIN_RESET);
+                HAL_GPIO_WritePin(MOTOR_PORT, LEFT_IN2, GPIO_PIN_SET);
                 hapa_motion_light_toggle(HAPA_MOTION_LIGHT_RV);
                 break;
 
             case HAPA_FORWARD:
-                HAL_GPIO_WritePin(MOTOR_PORT, LEFT_IN1, GPIO_PIN_RESET);
-                HAL_GPIO_WritePin(MOTOR_PORT, LEFT_IN2, GPIO_PIN_SET);
+                HAL_GPIO_WritePin(MOTOR_PORT, LEFT_IN1, GPIO_PIN_SET);
+                HAL_GPIO_WritePin(MOTOR_PORT, LEFT_IN2, GPIO_PIN_RESET);
                 hapa_motion_light_toggle(HAPA_MOTION_LIGHT_FD);
 
                 break;
@@ -62,14 +62,14 @@ void hapa_motor_init(void)
         switch (right)
         {
             case HAPA_REVERSE:
-                HAL_GPIO_WritePin(MOTOR_PORT, RIGHT_IN1, GPIO_PIN_SET);
-                HAL_GPIO_WritePin(MOTOR_PORT, RIGHT_IN2, GPIO_PIN_RESET);
+                HAL_GPIO_WritePin(MOTOR_PORT, RIGHT_IN1, GPIO_PIN_RESET);
+                HAL_GPIO_WritePin(MOTOR_PORT, RIGHT_IN2, GPIO_PIN_SET);
                 hapa_motion_light_toggle(HAPA_MOTION_LIGHT_RV);
                 break;
 
             case HAPA_FORWARD:
-                HAL_GPIO_WritePin(MOTOR_PORT, RIGHT_IN1, GPIO_PIN_RESET);
-                HAL_GPIO_WritePin(MOTOR_PORT, RIGHT_IN2, GPIO_PIN_SET);
+                HAL_GPIO_WritePin(MOTOR_PORT, RIGHT_IN1, GPIO_PIN_SET);
+                HAL_GPIO_WritePin(MOTOR_PORT, RIGHT_IN2, GPIO_PIN_RESET);
                 hapa_motion_light_toggle(HAPA_MOTION_LIGHT_FD);
                 break;
 

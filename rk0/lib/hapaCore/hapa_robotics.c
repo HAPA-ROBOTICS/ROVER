@@ -3,7 +3,7 @@
 
 
 #if KIT_VERSION == HAPA_RK0
-    uint32_t hapa_ir_ctrl[3] ={0};
+    uint32_t hapa_ir_ctrl[5] ={0};
         
 #endif
 
@@ -89,7 +89,7 @@
     HAL_GPIO_Init(IR_PORT, &ir_gpio);
     hapa_ir_timer_init();
 
-    for (uint32_t index = 0; index < 3; index++)
+    for (uint32_t index = 0; index < 5; index++)
     {
         uint32_t code = 0;
 

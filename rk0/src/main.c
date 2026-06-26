@@ -26,19 +26,26 @@ int main(void)
 
     uint32_t code;
 
+
     while (1){
 
         if(HAL_GPIO_ReadPin(IR_PORT, IR_PIN)){ //only when pin is high 
             if(hapa_ir_read_nec(&code)){
-                if(code == hapa_ir_ctrl[HAPA_IR_FD])hapa_move(HAPA_FORWARD, HAPA_FORWARD);
-                if(code == hapa_ir_ctrl[HAPA_IR_RV])hapa_move(HAPA_REVERSE, HAPA_REVERSE);
-                if(code == hapa_ir_ctrl[HAPA_IR_N])hapa_move(HAPA_STOP, HAPA_STOP);
+                if(code == hapa_ir_ctrl[HAPA_IR_N])hapa_move(HAPA_STOP, HAPA_STOP); //full stop
+                if(code == hapa_ir_ctrl[HAPA_IR_FD])hapa_move(HAPA_FORWARD, HAPA_FORWARD); //forward
+                if(code == hapa_ir_ctrl[HAPA_IR_RV])hapa_move(HAPA_REVERSE, HAPA_REVERSE); //reverse
+                if(code == hapa_ir_ctrl[HAPA_IR_LT])hapa_move(HAPA_STOP, HAPA_FORWARD);//forward left
+                if(code == hapa_ir_ctrl[HAPA_IR_RT])hapa_move(HAPA_FORWARD, HAPA_STOP);//forward right
             }
         }
 
         HAL_Delay(10);
+
+
+        //  HAL_GPIO_WritePin(MOTOR_PORT, RIGHT_IN1, GPIO_PIN_RESET);
+        //  HAL_GPIO_WritePin(MOTOR_PORT, RIGHT_IN2, GPIO_PIN_SET);
         
-        // hapa_move(HAPA_FORWARD, HAPA_FORWARD);
+        // hapa_move(HAPA_REVERSE, HAPA_FORWARD);
         // HAL_Delay(2000);
         // hapa_move(HAPA_STOP, HAPA_STOP);
         // HAL_Delay(500);

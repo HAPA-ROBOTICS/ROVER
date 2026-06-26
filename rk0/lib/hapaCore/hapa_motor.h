@@ -19,13 +19,13 @@ typedef enum{
     #define MOTOR_PORT     GPIOA
     #define MOTOR_ENABLE   GPIO_PIN_11
 
-    // Motor A == LEFT
-    #define LEFT_IN1 GPIO_PIN_0
-    #define LEFT_IN2 GPIO_PIN_1
+    // Motor A == RIGHT
+    #define RIGHT_IN1 GPIO_PIN_0
+    #define RIGHT_IN2 GPIO_PIN_1
 
-    // Motor B == RIGHT
-    #define RIGHT_IN1 GPIO_PIN_2
-    #define RIGHT_IN2 GPIO_PIN_3
+    // Motor B == LEFT
+    #define LEFT_IN1 GPIO_PIN_2
+    #define LEFT_IN2 GPIO_PIN_4 //ON CURRENT BOARD GPIO3 IS NOT WORKING WILL SWITCH
 
 #elif KIT_VERSION == HAPA_RK1
 
@@ -70,8 +70,8 @@ typedef enum{
     *           1 = Forward
     */
     void hapa_move(
-        hapa_motor_state_t left,
-        hapa_motor_state_t right
+        hapa_motor_state_t right,
+        hapa_motor_state_t left
     );
 
 #elif KIT_VERSION == HAPA_RK1
